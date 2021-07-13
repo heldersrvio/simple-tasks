@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Firebase from '../Firebase';
+import '../Styles/AdminPage.css';
 
 const AdminPage = (props) => {
 	const [users, setUsers] = useState([]);

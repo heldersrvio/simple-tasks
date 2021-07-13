@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Firebase from '../Firebase';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import '../Styles/UserPage.css';
 
 const UserPage = (props) => {
 	const [userInfo, setUserInfo] = useState(null);
@@ -9,14 +11,29 @@ const UserPage = (props) => {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			setUserInfo(/* await Firebase.getUserData(props.user) */);
+			setUserInfo(await Firebase.getUser(props.user));
 		};
 		fetchData();
-	}, []);
+	}, [props.user]);
 
-	const deleteTask = (taskIndex) => {};
+	const deleteTask = async (taskIndex) => {
+		await Firebase.deleteTask(props.user, taskIndex);
+		setUserInfo((previous) => {
+			return {
+				...previous,
+				tasks: previous.tasks.filter((_t, index) => index !== taskIndex),
+			};
+		});
+	};
 
-	const addTask = () => {
+	const addTask = async () => {
+		await Firebase.addTask(props.user, newTaskInput);
+		setUserInfo((previous) => {
+			return {
+				...previous,
+				tasks: previous.tasks.concat(newTaskInput),
+			};
+		});
 		setNewTaskInput('');
 		setIsShowingAddTaskSection(false);
 	};
@@ -27,7 +44,7 @@ const UserPage = (props) => {
 				type="text"
 				className="add-new-task-input"
 				value={newTaskInput}
-				onChange={(e) => setNewTaskInput(e.target.valye)}
+				onChange={(e) => setNewTaskInput(e.target.value)}
 			></input>
 			<button onClick={addTask}>Adicionar</button>
 		</div>
@@ -44,7 +61,9 @@ const UserPage = (props) => {
 							<button
 								className="delete-task-button"
 								onClick={(_e) => deleteTask(index)}
-							></button>
+							>
+								<FontAwesomeIcon icon="trash-alt" color="black" size="lg" />
+							</button>
 						</div>
 					);
 				})}
@@ -54,7 +73,9 @@ const UserPage = (props) => {
 					<button
 						className="add-task-button"
 						onClick={(_e) => setIsShowingAddTaskSection(true)}
-					></button>
+					>
+						<FontAwesomeIcon icon="plus-circle" color="white" size="lg" />
+					</button>
 				)}
 			</div>
 		) : null;

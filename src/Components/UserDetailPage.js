@@ -1,11 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import '../Styles/UserDetailPage.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const UserDetailPage = (props) => {
 	return (
 		<div className="user-detail-page">
 			<div className="header">
-				<button className="back-button" onClick={props.back}></button>
+				<button className="back-button" onClick={props.back}>
+					<FontAwesomeIcon icon="arrow-left" />
+				</button>
 				<h1>{props.userInfo.userName}</h1>
 			</div>
 			<div className="user-info-section">
@@ -28,9 +32,9 @@ const UserDetailPage = (props) => {
 					<ul>
 						{props.userInfo.tasks.map((task, index) => {
 							return (
-								<span className="user-info-task-item" key={index}>
-									{task}
-								</span>
+								<li className="user-info-task-item" key={index}>
+									<span>{task}</span>
+								</li>
 							);
 						})}
 					</ul>

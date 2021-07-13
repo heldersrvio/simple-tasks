@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import '../Styles/SignUp.css';
 
 const SignUp = (props) => {
 	const [nameInput, setNameInput] = useState('');
@@ -13,8 +14,8 @@ const SignUp = (props) => {
 	const verifyAndSignUp = async () => {
 		if (
 			[
-				nameInput,
 				userNameInput,
+				nameInput,
 				emailInput,
 				passwordInput,
 				passwordAgainInput,
@@ -25,8 +26,8 @@ const SignUp = (props) => {
 			setErrorMessage('Senhas não batem');
 		} else {
 			const wasSuccessful = await props.signUp(
-				nameInput,
 				userNameInput,
+				nameInput,
 				emailInput,
 				passwordInput
 			);
@@ -47,6 +48,7 @@ const SignUp = (props) => {
 	const signUpForm = (
 		<div className="sign-up">
 			<input
+				className="name-input"
 				type="text"
 				placeholder="Nome"
 				value={nameInput}

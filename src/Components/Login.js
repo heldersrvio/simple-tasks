@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import '../Styles/Login.css';
 
 const Login = (props) => {
 	const [userNameInput, setUserNameInput] = useState('');
@@ -31,8 +32,13 @@ const Login = (props) => {
 				onChange={(e) => setPasswordInput(e.target.value)}
 			></input>
 			<span className="login-error-span">{errorMessage}</span>
-			<button onClick={(_e) => validateAndLogin()}>Entrar</button>
-			<button onClick={(_e) => props.redirectToSignUp()}>
+			<button onClick={(_e) => validateAndLogin()} className="enter-button">
+				Entrar
+			</button>
+			<button
+				onClick={(_e) => props.redirectToSignUp()}
+				className="not-a-user-button"
+			>
 				Ainda não tenho cadastro
 			</button>
 		</div>

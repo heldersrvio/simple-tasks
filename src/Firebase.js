@@ -25,15 +25,18 @@ const Firebase = (() => {
 
 	const getUser = async (userName) => {
 		const userDoc = await database.collection('users').doc(userName).get();
-		return {
-			userName: userDoc.id,
-			...userDoc.data(),
-		};
+		if (userDoc.exists) {
+			return {
+				userName: userDoc.id,
+				...userDoc.data(),
+			};
+		}
+		throw new Error('Username does not exist');
 	};
 
 	const createUser = async (userName, name, email, password) => {
 		try {
-			await getUser(userName);
+			console.log(await getUser(userName));
 			return false;
 		} catch (_error) {
 			await database
