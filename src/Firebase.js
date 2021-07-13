@@ -36,7 +36,7 @@ const Firebase = (() => {
 
 	const createUser = async (userName, name, email, password) => {
 		try {
-			console.log(await getUser(userName));
+			await getUser(userName);
 			return false;
 		} catch (_error) {
 			await database
@@ -49,6 +49,8 @@ const Firebase = (() => {
 
 	const login = async (userName, password) => {
 		try {
+            console.log(password);
+            console.log((await getUser(userName)).password === password);
 			return (await getUser(userName)).password === password;
 		} catch (_error) {
 			return false;
