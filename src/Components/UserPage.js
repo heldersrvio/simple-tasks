@@ -62,7 +62,12 @@ const UserPage = (props) => {
 	return (
 		<div className="user-page">
 			{userInfo !== null ? (
-				<h1 className="user-page-header">{userInfo.name}</h1>
+				<div className="header">
+					<h1 className="user-page-header">{userInfo.name}</h1>
+					<button className="logout-button" onClick={props.logout}>
+						Sair
+					</button>
+				</div>
 			) : null}
 			{tasksSection}
 		</div>
@@ -71,6 +76,7 @@ const UserPage = (props) => {
 
 UserPage.propTypes = {
 	user: PropTypes.string,
+	logout: PropTypes.func,
 };
 
 export default UserPage;

@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import Firebase from '../Firebase';
 
 const AdminPage = (props) => {
 	const [users, setUsers] = useState([]);
 
 	useEffect(() => {
 		const fetchData = async () => {
-			setUsers(/* */);
+			setUsers(await Firebase.getUsers());
 		};
 		fetchData();
 	}, []);
 
 	return (
 		<div className="admin-page">
-			<h1>Admin</h1>
+			<div className="header">
+				<h1>Admin</h1>
+				<button className="logout-button" onClick={props.logout}>
+					Sair
+				</button>
+			</div>
 			<h2>Usuários</h2>
 			{users.map((user, index) => {
 				return (
@@ -32,6 +38,7 @@ const AdminPage = (props) => {
 
 AdminPage.propTypes = {
 	redirectToUserDetailPage: PropTypes.func,
+	logout: PropTypes.func,
 };
 
 export default AdminPage;

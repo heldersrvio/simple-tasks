@@ -4,7 +4,10 @@ import PropTypes from 'prop-types';
 const UserDetailPage = (props) => {
 	return (
 		<div className="user-detail-page">
-			<h1>{props.userInfo.userName}</h1>
+			<div className="header">
+				<button className="back-button" onClick={props.back}></button>
+				<h1>{props.userInfo.userName}</h1>
+			</div>
 			<div className="user-info-section">
 				<div className="user-info-name-section">
 					<label htmlFor="name">Nome: </label>
@@ -13,6 +16,12 @@ const UserDetailPage = (props) => {
 				<div className="user-info-email-section">
 					<label htmlFor="email">E-mail: </label>
 					<span>{props.userInfo.email}</span>
+				</div>
+				<div className="user-info-role-section">
+					<label htmlFor="role">Privilégios: </label>
+					<span>
+						{props.userInfo.role === 'admin' ? 'Administrador' : 'Usuário'}
+					</span>
 				</div>
 				<div className="user-info-tasks-section ">
 					<label htmlFor="tasks">Tarefas: </label>
@@ -37,7 +46,9 @@ UserDetailPage.propTypes = {
 		userName: PropTypes.string,
 		email: PropTypes.string,
 		tasks: PropTypes.arrayOf(PropTypes.string),
+		role: PropTypes.string,
 	}),
+	back: PropTypes.func,
 };
 
 export default UserDetailPage;
