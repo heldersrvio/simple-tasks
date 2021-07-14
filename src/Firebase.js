@@ -49,8 +49,6 @@ const Firebase = (() => {
 
 	const login = async (userName, password) => {
 		try {
-            console.log(password);
-            console.log((await getUser(userName)).password === password);
 			return (await getUser(userName)).password === password;
 		} catch (_error) {
 			return false;
